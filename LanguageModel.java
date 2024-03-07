@@ -61,8 +61,6 @@ public class LanguageModel {
         }
     }
 
-    }
-
     // Computes and sets the probabilities (p and cp fields) of all the
     // characters in the given list. */
     public void calculateProbabilities(List probs) {
@@ -134,6 +132,18 @@ public class LanguageModel {
     }
 
     public static void main(String[] args) {
-        // Your code goes here
+        int windowLength = Integer.parseInt(args[0]);
+        String initialText = args[1];
+        int generatedTextLength = Integer.parseInt(args[2]);
+        Boolean randomGeneration = args[3].equals("random");
+        String fileName = args[4];
+        LanguageModel lm;
+        if (randomGeneration)
+            lm = new LanguageModel(windowLength);
+        else
+            lm = new LanguageModel(windowLength, 20);
+        lm.train(fileName);
+
+        System.out.println(lm.generate(initialText, generatedTextLength));
     }
 }
