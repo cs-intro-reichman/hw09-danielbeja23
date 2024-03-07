@@ -52,8 +52,6 @@ public class List {
         return str.substring(0, str.length() - 1) + ")";
     }
 
-    }
-
     /**
      * Returns the index of the first CharData object in this list
      * that has the same chr value as the given char,
@@ -116,7 +114,14 @@ public class List {
      * throws an IndexOutOfBoundsException.
      */
     public CharData get(int index) {
-        // Your code goes here
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+        Node current = first;
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+        return current.cp;
     }
 
     /**
@@ -152,4 +157,5 @@ public class List {
         // Returns an iterator that starts in that element
         return new ListIterator(current);
     }
+
 }
