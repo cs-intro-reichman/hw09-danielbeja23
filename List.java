@@ -92,18 +92,16 @@ public class List {
     public boolean remove(char chr) {
         Node prev = null;
         Node current = first;
-        while (current != null && !current.cp.equals(chr)) {
+        if (indexOf(chr) == -1)
+            return false;
+        while (!current.cp.equals(chr) && (current != null)) {
             prev = current;
             current = current.next;
         }
-        if (prev == null) {
+        if (prev == null)
             first = first.next;
-        } else {
+        else
             prev.next = current.next;
-        }
-        if (current == null) {
-            return false;
-        }
         size--;
         return true;
     }
